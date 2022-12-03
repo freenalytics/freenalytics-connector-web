@@ -37,11 +37,13 @@ export class PageHandler {
   private handleClick(event: MouseEvent) {
     this.numOfClicks++;
 
+    const [element] = event.composedPath() as Element[];
+
     return this.client.postPayload({
       element_clicked: {
-        tag_name: 'tag',
-        class_name: 'class',
-        id: 'id',
+        tag_name: element?.localName ?? 'unknown',
+        class_name: element?.className ?? '',
+        id: element?.id ?? '',
         page_x: event.pageX,
         page_y: event.pageY,
         client_x: event.clientX,

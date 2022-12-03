@@ -55,7 +55,14 @@ describe('PageHandler', () => {
       pageX: 1,
       pageY: 2,
       clientX: 3,
-      clientY: 4
+      clientY: 4,
+      composedPath: () => {
+        return [{
+          localName: 'div',
+          id: 'my_div',
+          className: 'classes'
+        } as unknown as EventTarget];
+      }
     } as MouseEvent;
 
     it('should call handleClick() with the appropriate data.', () => {
@@ -63,9 +70,9 @@ describe('PageHandler', () => {
 
       expect(clientMock.postPayload).toHaveBeenCalledWith({
         element_clicked: {
-          tag_name: 'tag',
-          class_name: 'class',
-          id: 'id',
+          tag_name: 'div',
+          class_name: 'classes',
+          id: 'my_div',
           page_x: 1,
           page_y: 2,
           client_x: 3,
