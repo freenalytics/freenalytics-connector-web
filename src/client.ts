@@ -37,7 +37,14 @@ export class Client {
 
   public async postPayload(payload: Payload) {
     try {
-      console.log(`${this.apiUrl}/applications/${this.domain}/data`, payload);
+      await fetch(`${this.apiUrl}/applications/${this.domain}/data`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
     } catch (error) {
       console.error(error);
     }

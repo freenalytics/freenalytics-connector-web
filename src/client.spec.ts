@@ -1,9 +1,12 @@
 import { Client, ClientOptions } from './client';
+import { Payload } from './payloads';
 
 const options: ClientOptions = {
-  apiUrl: 'http://localhost:3000',
+  apiUrl: 'http://localhost:4000/api',
   domain: 'FD-107hpu34tlb7hjk1f'
 };
+
+jest.spyOn(global, 'fetch').mockResolvedValue({} as any);
 
 describe('Client', () => {
   describe('constructor', () => {
@@ -32,6 +35,14 @@ describe('Client', () => {
       client.initialize();
 
       expect(client).toHaveProperty('pageHandler');
+    });
+  });
+
+  describe('postPayload()', () => {
+    it('should post the payload.', async () => {
+      const client = new Client(options);
+      await client.postPayload({ } as Payload);
+      expect(fetch).toHaveBeenCalledWith(`${options.apiUrl}/applications/${options.domain}/data`, expect.anything());
     });
   });
 });
