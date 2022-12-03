@@ -13,6 +13,11 @@ const clientMock = {
   postPayload: jest.fn()
 } as unknown as Client;
 
+jest.mock('./utils', () => ({
+  getPublicIp: jest.fn().mockResolvedValue(''),
+  getLocationForIp: jest.fn()
+}));
+
 describe('PageHandler', () => {
   let handler: PageHandler;
 
@@ -31,14 +36,14 @@ describe('PageHandler', () => {
   });
 
   describe('handleLoad()', () => {
-    it('should call handleLoad() with the appropriate data.', () => {
-      (handler as any).handleLoad();
+    it('should call handleLoad() with the appropriate data.', async () => {
+      await (handler as any).handleLoad();
 
       expect(clientMock.postPayload).toHaveBeenCalledWith({
         page_title: 'website',
         url_route: 'path',
         user_first_visit: true,
-        user_location: '',
+        user_location: 'N/A',
         referrer: ''
       });
     });

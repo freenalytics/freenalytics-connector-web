@@ -1,4 +1,5 @@
 import { Client } from './client';
+import { getLocationForIp, getPublicIp } from './utils';
 
 export class PageHandler {
   private client: Client;
@@ -13,12 +14,15 @@ export class PageHandler {
     window.addEventListener('beforeunload', this.handleBeforeUnload.bind(this));
   }
 
-  private handleLoad() {
+  private async handleLoad() {
+    const ip = await getPublicIp();
+    const location = ip ? await getLocationForIp(ip) : 'N/A';
+
     return this.client.postPayload({
       page_title: document.title,
       url_route: window.location.pathname,
       user_first_visit: !document.referrer,
-      user_location: '',
+      user_location: location,
       referrer: document.referrer
     });
   }
