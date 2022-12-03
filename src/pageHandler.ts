@@ -3,9 +3,13 @@ import { getLocationForIp, getPublicIp } from './utils';
 
 export class PageHandler {
   private client: Client;
+  private readonly visitTimestamp: number;
+  private numOfClicks: number;
 
   constructor(client: Client) {
     this.client = client;
+    this.visitTimestamp = Date.now();
+    this.numOfClicks = 0;
   }
 
   public registerEvents() {
@@ -28,6 +32,8 @@ export class PageHandler {
   }
 
   private handleClick(event: MouseEvent) {
+    this.numOfClicks++;
+
     return this.client.postPayload({
       element_clicked: {
         tag_name: 'tag',
@@ -42,10 +48,12 @@ export class PageHandler {
   }
 
   private handleBeforeUnload() {
+    const timeInPage = (Date.now() - this.visitTimestamp) / 1000;
+
     return this.client.postPayload({
-      user_time_in_page: 0,
+      user_time_in_page: timeInPage,
       user_scrolled: false,
-      num_of_clicks: 1
+      num_of_clicks: this.numOfClicks
     });
   }
 }

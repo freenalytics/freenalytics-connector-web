@@ -72,16 +72,27 @@ describe('PageHandler', () => {
         }
       });
     });
+
+    it('should increment number of clicks.', async () => {
+      await (handler as any).handleClick(event);
+
+      expect(handler).toHaveProperty('numOfClicks', 1);
+    });
   });
 
   describe('handleBeforeUnload()', () => {
     it('should call handleBeforeUnload() with the appropriate data.', () => {
+      const nowSpy = jest.spyOn(Date, 'now');
+      nowSpy.mockReturnValue(1000);
+      handler = new PageHandler(clientMock);
+
+      nowSpy.mockReturnValue(2000);
       (handler as any).handleBeforeUnload();
 
       expect(clientMock.postPayload).toHaveBeenCalledWith({
-        user_time_in_page: 0,
+        user_time_in_page: 1,
         user_scrolled: false,
-        num_of_clicks: 1
+        num_of_clicks: 0
       });
     });
   });
