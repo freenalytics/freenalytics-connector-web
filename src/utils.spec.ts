@@ -30,26 +30,13 @@ describe('Utils', () => {
         {
           json: () => {
             return Promise.resolve({
-              success: true,
-              country: 'France',
+              country_name: 'France',
               city: 'Paris'
             });
           }
         } as any);
 
       expect(await getLocationForIp(ip)).toBe('Paris, France');
-    });
-
-    it('should return N/A string if not accessible.', async () => {
-      jest.spyOn(global, 'fetch').mockResolvedValueOnce(
-        {
-          json: () => {
-            return Promise.resolve({
-              success: false
-            });
-          }
-        } as any);
-      expect(await getLocationForIp(ip)).toBe('N/A');
     });
 
     it('should return N/A if request rejects.', async () => {
