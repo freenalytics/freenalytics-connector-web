@@ -1,0 +1,39 @@
+name: On Push (Master)
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    name: Run Tests
+    uses: ./.github/workflows/pr.yml
+
+  build:
+    name: Build Artifacts
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.15.1
+          cache: npm
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Bundler
+        run: npm run build
+
+      - name: Deploy to dist Branch
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: dist
+          FOLDER: dist
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
