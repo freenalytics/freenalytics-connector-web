@@ -6,6 +6,11 @@
   "plugins": [
     "@typescript-eslint"
   ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
   "rules": {
     "one-var": "off",
     "max-len": ["warn", {
