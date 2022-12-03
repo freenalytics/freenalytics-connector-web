@@ -15,11 +15,11 @@ export class PageHandler {
 
   private handleLoad() {
     return this.client.postPayload({
-      page_title: window.document.title,
+      page_title: document.title,
       url_route: window.location.pathname,
-      user_first_visit: !window.document.referrer,
+      user_first_visit: !document.referrer,
       user_location: '',
-      referrer: window.document.referrer
+      referrer: document.referrer
     });
   }
 

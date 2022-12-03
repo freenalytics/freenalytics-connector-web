@@ -25,4 +25,13 @@ describe('Client', () => {
       }).not.toThrow(Error);
     });
   });
+
+  describe('initialize()', () => {
+    it('should set the pageHandler property.', () => {
+      const client = new Client(options);
+      client.initialize();
+
+      expect(client).toHaveProperty('pageHandler');
+    });
+  });
 });
