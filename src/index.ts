@@ -1,3 +1,12 @@
-export const testing: () => void = () => {
-  console.log('hello');
+import { Client, ClientOptions } from './client';
+import { Payload, ElementClickPayload, OnBeforeUnLoadPayload, OnLoadPayload } from './payloads';
+
+export {
+  Client,
+  ClientOptions,
+
+  Payload,
+  ElementClickPayload,
+  OnLoadPayload,
+  OnBeforeUnLoadPayload
 };
