@@ -43,7 +43,8 @@ export class Client {
           Accept: 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        keepalive: true
       });
     } catch (error) {
       console.error(error);
