@@ -14,6 +14,7 @@ export type OnBeforeUnLoadPayload = {
 
 export type ElementClickPayload = {
   element_clicked: {
+    url_route: string,
     tag_name: string,
     class_name: string,
     id: string,

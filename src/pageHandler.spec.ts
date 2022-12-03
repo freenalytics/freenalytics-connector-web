@@ -70,6 +70,7 @@ describe('PageHandler', () => {
 
       expect(clientMock.postPayload).toHaveBeenCalledWith({
         element_clicked: {
+          url_route: 'path',
           tag_name: 'div',
           class_name: 'classes',
           id: 'my_div',

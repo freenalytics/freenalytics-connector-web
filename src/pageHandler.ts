@@ -41,6 +41,7 @@ export class PageHandler {
 
     return this.client.postPayload({
       element_clicked: {
+        url_route: window.location.pathname,
         tag_name: element?.localName ?? 'unknown',
         class_name: element?.className ?? '',
         id: element?.id ?? '',
