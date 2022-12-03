@@ -1,12 +1,14 @@
 import 'cross-fetch/polyfill';
 
-const IP_API_URL = 'https://checkip.amazonaws.com';
+const IP_API_URL = 'https://api.ipify.org/?format=json';
 const GEO_API_URL = 'https://reallyfreegeoip.org/json';
 
 export const getPublicIp = async (): Promise<string> => {
   try {
     const response = await fetch(IP_API_URL);
-    return await response.text();
+    const json = await response.json();
+
+    return json.ip;
   } catch (error) {
     return '';
   }
