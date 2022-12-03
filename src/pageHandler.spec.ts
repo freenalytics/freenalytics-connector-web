@@ -32,6 +32,7 @@ describe('PageHandler', () => {
       expect(window.addEventListener).toHaveBeenCalledWith('load', expect.anything());
       expect(window.addEventListener).toHaveBeenCalledWith('click', expect.anything());
       expect(window.addEventListener).toHaveBeenCalledWith('beforeunload', expect.anything());
+      expect(window.addEventListener).toHaveBeenCalledWith('wheel', expect.anything(), { once: true });
     });
   });
 
@@ -77,6 +78,14 @@ describe('PageHandler', () => {
       await (handler as any).handleClick(event);
 
       expect(handler).toHaveProperty('numOfClicks', 1);
+    });
+  });
+
+  describe('handleScroll()', () => {
+    it('should set scrolled to true.', () => {
+      expect(handler).toHaveProperty('scrolled', false);
+      (handler as any).handleScroll();
+      expect(handler).toHaveProperty('scrolled', true);
     });
   });
 

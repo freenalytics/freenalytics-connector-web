@@ -5,17 +5,20 @@ export class PageHandler {
   private client: Client;
   private readonly visitTimestamp: number;
   private numOfClicks: number;
+  private scrolled: boolean;
 
   constructor(client: Client) {
     this.client = client;
     this.visitTimestamp = Date.now();
     this.numOfClicks = 0;
+    this.scrolled = false;
   }
 
   public registerEvents() {
     window.addEventListener('load', this.handleLoad.bind(this));
     window.addEventListener('click', this.handleClick.bind(this));
     window.addEventListener('beforeunload', this.handleBeforeUnload.bind(this));
+    window.addEventListener('wheel', this.handleScroll.bind(this), { once: true });
   }
 
   private async handleLoad() {
@@ -47,12 +50,16 @@ export class PageHandler {
     });
   }
 
+  private handleScroll() {
+    this.scrolled = true;
+  }
+
   private handleBeforeUnload() {
     const timeInPage = (Date.now() - this.visitTimestamp) / 1000;
 
     return this.client.postPayload({
       user_time_in_page: timeInPage,
-      user_scrolled: false,
+      user_scrolled: this.scrolled,
       num_of_clicks: this.numOfClicks
     });
   }
