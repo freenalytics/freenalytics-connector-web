@@ -1,5 +1,6 @@
 import 'cross-fetch/polyfill';
 import { Payload } from './payloads';
+import { PageHandler } from './pageHandler';
 
 export interface ClientOptions {
   apiUrl: string
@@ -9,12 +10,14 @@ export interface ClientOptions {
 export class Client {
   private readonly apiUrl: string;
   private readonly domain: string;
+  private pageHandler: PageHandler | null;
 
   constructor(options: ClientOptions) {
     Client.validateOptions(options);
 
     this.apiUrl = options.apiUrl;
     this.domain = options.domain;
+    this.pageHandler = null;
   }
 
   private static validateOptions(options: ClientOptions) {
@@ -25,6 +28,11 @@ export class Client {
     if (!options.domain) {
       throw new Error('options.domain needs to be specified.');
     }
+  }
+
+  public initialize() {
+    this.pageHandler = new PageHandler(this);
+    this.pageHandler.registerEvents();
   }
 
   public async postPayload(payload: Payload) {

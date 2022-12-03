@@ -4,7 +4,7 @@
   "description": "A connector library for applications that use the official Web template.",
   "type": "module",
   "scripts": {
-    "dev:serve": "http-server dist",
+    "dev:serve": "http-server dist -p 9000",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint ./src --ext .ts",
