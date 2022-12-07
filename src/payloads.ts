@@ -21,7 +21,11 @@ export type ElementClickPayload = {
     page_x: number,
     page_y: number,
     page_width: number,
-    page_height: number
+    page_height: number,
+    client_x: number,
+    client_y: number,
+    client_width: number,
+    client_height: number
   }
 }
 
