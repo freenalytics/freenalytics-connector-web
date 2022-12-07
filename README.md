@@ -52,6 +52,14 @@ properties:
         type: integer
       page_height:
         type: integer
+      client_x:
+        type: integer
+      client_y:
+        type: integer
+      client_width:
+        type: integer
+      client_height:
+        type: integer
 ```
 
 ## Usage
