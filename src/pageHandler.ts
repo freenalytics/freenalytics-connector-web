@@ -47,8 +47,12 @@ export class PageHandler {
         id: element?.id ?? '',
         page_x: event.pageX,
         page_y: event.pageY,
+        page_width: document.documentElement.scrollWidth,
+        page_height: document.documentElement.scrollHeight,
         client_x: event.clientX,
-        client_y: event.clientY
+        client_y: event.clientY,
+        client_width: window.innerWidth,
+        client_height: window.innerHeight
       }
     });
   }

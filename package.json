@@ -1,6 +1,6 @@
 {
   "name": "freenalytics-connector-web",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A connector library for applications that use the official Web template.",
   "type": "module",
   "scripts": {

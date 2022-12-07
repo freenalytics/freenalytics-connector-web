@@ -3,11 +3,19 @@ import { Client } from './client';
 
 window.addEventListener = jest.fn();
 document.title = 'website';
+Object.defineProperty(document, 'documentElement', {
+  value: {
+    scrollWidth: 10,
+    scrollHeight: 15
+  }
+});
 Object.defineProperty(window, 'location', {
   value: {
     pathname: 'path'
   }
 });
+Object.defineProperty(window, 'innerWidth', { value: 30 });
+Object.defineProperty(window, 'innerHeight', { value: 40 });
 
 const clientMock = {
   postPayload: jest.fn()
@@ -76,8 +84,12 @@ describe('PageHandler', () => {
           id: 'my_div',
           page_x: 1,
           page_y: 2,
+          page_width: 10,
+          page_height: 15,
           client_x: 3,
-          client_y: 4
+          client_y: 4,
+          client_width: 30,
+          client_height: 40
         }
       });
     });
