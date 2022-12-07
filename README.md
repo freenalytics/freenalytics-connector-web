@@ -48,9 +48,17 @@ properties:
         type: integer
       page_y:
         type: integer
+      page_width:
+        type: integer
+      page_height:
+        type: integer
       client_x:
         type: integer
       client_y:
+        type: integer
+      client_width:
+        type: integer
+      client_height:
         type: integer
 ```
 
@@ -59,7 +67,7 @@ properties:
 In order to integrate this library with your webpage, add the following tags inside your `head` tag in your `html` pages:
 
 ```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/freenalytics/freenalytics-connector-web@v1.0.0/connector.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/freenalytics/freenalytics-connector-web@v1.1.0/connector.min.js"></script>
 <script type="text/javascript" src="/script.js"></script>
 ```
 
