@@ -3,7 +3,7 @@ import { Client } from './client';
 
 window.addEventListener = jest.fn();
 document.title = 'website';
-Object.defineProperty(document, 'body', {
+Object.defineProperty(document, 'documentElement', {
   value: {
     scrollWidth: 10,
     scrollHeight: 15
